@@ -1,19 +1,71 @@
+let color = "black";
+let click = false;
 
 document.addEventListener("DOMContentLoaded", function () {
-    createBoard(32);
-    console.log('hi')
-})
+  createBoard(16);
 
-function createBoard(size){
-    let container = document.getElementById("container");
-    container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-    container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
-
-    let numbDivs = size * size;
-
-    for( let i = 0; i < numbDivs; i ++){
-        let div = document.createElement("div");
-        div.style.backgroundColor= 'yellow';
-        container.insertAdjacentElement("beforeend", div)
+  document.querySelector("body").addEventListener("click", function (e) {
+    if (e.target.tagName != "BUTTON") {
+      click = !click;
+      let draw = document.querySelector("#draw");
+      if (click) {
+        draw.innerHTML = "Now you can draw";
+      }
+    } else {
+      draw.innerHTML = "You're not allowed";
     }
+  });
+
+  let btn_popup = document.querySelector("#popup");
+  btn_popup.addEventListener("click", function () {
+    let size = getSize();
+    createBoard(size);
+  });
+});
+
+function createBoard(size) {
+  let container = document.getElementById("container");
+  container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+  container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+  let numbDivs = size * size;
+
+  for (let i = 0; i < numbDivs; i++) {
+    let div = document.createElement("div");
+    div.classList.add("point");
+    div.addEventListener("mouseover", colorDiv);
+    container.insertAdjacentElement("beforeend", div);
+  }
+}
+
+function getSize() {
+  let input = prompt("What size do you want the board to be?");
+  let message = document.querySelector("#message");
+  if (input == "") {
+    message.innerHTML = "Please provide a number";
+  } else if (input < 0 || input > 100) {
+    message.innerHTML = "Provide a number between 1 and 100";
+  } else {
+    message.innerHTML = "Now you can play!";
+    return input;
+  }
+}
+
+function colorDiv() {
+  if (click) {
+    if (color == "random") {
+      this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    } else {
+      this.style.backgroundColor = "Black";
+    }
+  }
+}
+
+function setColor(colorChoice) {
+  color = colorChoice;
+}
+
+function resetBoard() {
+  let divs = document.querySelectorAll(".point");
+  divs.forEach((point) => (point.style.backgroundColor = "rgb(233, 219, 219)"));
 }

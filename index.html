@@ -6,21 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/2ee32fbaa3.js" crossorigin="anonymous"></script>
     <title>Etch-A-Sketch</title>
 </head>
 <body>
     <h1>Etch-A-sketch</h1>
     <div class="header">
         <h6>Select the size</h6>
-        <button id="popup" class="btn btn-primary">Select</button>
+        <button id="popup" class="btn btn-primary" >Select</button>
     </div>
+    <p id="message"></p>
+    <p id="draw"></p>
     <div id="container">
     </div>
     <div class="footer">
-        <button class="btn btn-dark">Black</button>
-        <button class="btn btn-secondary">Random</button>
-        <button class="btn btn-light">Erase</button>
+        <button class="btn btn-dark" onclick="setColor('black')">Black</button>
+        <button class="btn btn-secondary" onclick="setColor('random')">Random</button>
+        <button class="btn btn-light" onclick ="resetBoard()">Erase</button>
     </div>
+
+    <footer class="credits">Made by <a href="https://github.com/pflaviuss"><i class="fa-brands fa-github"></i> pflaviuss </a>
+    </footer>
 </body>
 </html>
