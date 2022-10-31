@@ -1,42 +1,19 @@
-const container = document.getElementById("container");
 
+document.addEventListener("DOMContentLoaded", function () {
+    createBoard(32);
+    console.log('hi')
+})
 
+function createBoard(size){
+    let container = document.getElementById("container");
+    container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
+    let numbDivs = size * size;
 
-
-var mouseDown = false;
-document.body.onmousedown = function(){
-    mouseDown = true;
-};
-document.body.onmouseup = function(){
-    mouseDown = false;
-}
-
-
-function makeRows(rows,cols){
-    container.style.setProperty('--grid-rows', rows);
-    container.style.setProperty('--grid-cols', cols);
-
-    for(let c = 0; c < (rows * cols); c++){
-        let cell = document.createElement('div');
-       
-        cell.addEventListener('mouseover', changeColor);
-        cell.addEventListener('mousedown', changeColor);
-        container.appendChild(cell).className = 
-        'grid-item';
-    }
-}
-
-makeRows(16,16);
-
-
-
-
-function changeColor(e){
-    if(mouseDown){
-        let color1 = Math.floor(Math.random() * 256);
-        let color2 = Math.floor(Math.random() * 256);
-        let color3 = Math.floor(Math.random() * 256);
-        e.target.style.backgroundColor = `rgb(${color1},${color2},${color3})`;
+    for( let i = 0; i < numbDivs; i ++){
+        let div = document.createElement("div");
+        div.style.backgroundColor= 'yellow';
+        container.insertAdjacentElement("beforeend", div)
     }
 }
